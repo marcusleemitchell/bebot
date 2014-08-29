@@ -32,6 +32,9 @@ gem 'rack',            require: false
 # ping/pong
 gem 'newrelic_rpm',    require: false
 
+# better distance of time in words
+gem 'time-lord', '~> 1.0'
+
 group :development do
   gem 'foreman'   # start processes, manage environement
 
@@ -44,4 +47,3 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-bundler'
 end
-
