@@ -27,7 +27,7 @@ describe Bebot::Services::GitPullRequestStatistics do
 
     let(:repo1) do
       repo = OpenStruct.new
-      repo.full_name = 'HouseTrip-Web_app'
+      repo.full_name = 'Acme App'
       repo
     end
     let(:org_repos) { [repo1] }
@@ -53,7 +53,7 @@ describe Bebot::Services::GitPullRequestStatistics do
       expect(gh_client).to receive(:pull_comments).and_return(generic_comment)
 
       message = [
-        "*HouseTrip-Web_app*\n48 years ago",
+        "*Acme App*\n48 years ago",
         "c0deMunki",
         "<http://test.local/pr/1234|This is a Pull Request>",
         "(2 comments)"
