@@ -47,12 +47,12 @@ describe Bebot::Services::GitPullRequestStatistics do
     let(:notifier)  { double(Slack::Notifier) }
 
     it 'generates a message from available PR data' do
-      expect(Slack::Notifier).to receive(:new).and_return(notifier)
-      expect(Octokit::Client).to receive(:new).and_return(gh_client)
-      expect(gh_client).to receive(:org_repos).and_return(org_repos)
-      expect(gh_client).to receive(:pull_requests).and_return(pull_requests)
-      expect(gh_client).to receive(:issue_comments).and_return(generic_comment)
-      expect(gh_client).to receive(:pull_comments).and_return(generic_comment)
+      allow(Slack::Notifier).to receive(:new).and_return(notifier)
+      allow(Octokit::Client).to receive(:new).and_return(gh_client)
+      allow(gh_client).to receive(:org_repos).and_return(org_repos)
+      allow(gh_client).to receive(:pull_requests).and_return(pull_requests)
+      allow(gh_client).to receive(:issue_comments).and_return(generic_comment)
+      allow(gh_client).to receive(:pull_comments).and_return(generic_comment)
 
       message = [
         "*Acme App*\n48 years ago",
@@ -61,7 +61,9 @@ describe Bebot::Services::GitPullRequestStatistics do
         "(2 comments)"
       ].join(" - ")
 
-      expect(notifier).to receive(:ping).with(message, {})
+      expect(notifier).to receive(:ping).with(message, {
+        :icon_url=>"https://octodex.github.com/images/daftpunktocat-guy.gif"
+      })
 
       described_class.new(args).run
     end
