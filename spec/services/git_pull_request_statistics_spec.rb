@@ -18,6 +18,8 @@ describe Bebot::Services::GitPullRequestStatistics do
   end
 
   it 'sets up the notifier' do
+    expect(Octokit::Client).to receive(:new).and_return(gh_client)
+    expect(gh_client).to receive(:org_repos).and_return([])
     expect(Slack::Notifier).to receive(:new)
       .and_return(notifier)
     described_class.new(args).run

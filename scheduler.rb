@@ -13,7 +13,7 @@ scheduler = Rufus::Scheduler.new
 
 ['09:00:00', '13:00:00'].each do |time|
   scheduler.at time do |job|
-    args = { repo: 'ht/ht-web-app', notify: [] }
+    args = { repo: ENV['REPO'], notify: [] }
     Bebot::Services::GitPullRequestStatistics.new(args).run
   end
 end
